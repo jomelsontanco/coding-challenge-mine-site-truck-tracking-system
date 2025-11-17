@@ -4,7 +4,9 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Overview
 
-This project is made to showcase software development process, structure and technical solutioning.
+The goal of the application is to model the movement of an autonomous truck as it moves between a loading and a dumping zone.
+
+Detailed requirements can be found [here](./markdown/angular-coding-challenge.pdf).
 
 ## Software Development Process
 
@@ -20,17 +22,17 @@ It follows three guiding patterns:
 
 ### Architecture
 
-The project is structured according to three concerns, each following a distinct responsibility:
+The project is structured according to four concerns, each following a distinct responsibility:
 
 1. Map Definition (map-definition, map-service, mock-map-definition) - responsible for defining the contents of the map ("what to render").
 
 2. Map View (map-component) - responsible for how the map is rendered ("what the map looks like").
 
-3. Truck Simulator (truck-simulator-service) - responsible for pushing real-time updates to the map ("when to render").
+3. Truck Simulator (truck-simulator-service) - responsible for controlling real-time updates to the map ("when to render").
 
 ### Project Structure
 
-This Angular application is divided into four folders:
+The project follows a simple Angular folder structure for small projects:
 
 1. services - contains the programs that need their state to be shared across the application.
 
