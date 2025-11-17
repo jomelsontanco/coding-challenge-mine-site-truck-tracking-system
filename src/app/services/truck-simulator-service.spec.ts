@@ -71,4 +71,20 @@ describe('TruckSimulator', () => {
     expect(newTruck.position.x).toBeLessThan(mockIdleTruck.position.x);
     expect(newTruck.position.y).toBeLessThan(mockIdleTruck.position.y);
   });
+
+  it('should pass sanity check for randomness', () => {
+    const possibleStatuses = [TruckStatus.IDLE, TruckStatus.LOADING, TruckStatus.DUMPING];
+    const N = 1000;
+    const selectedStatuses = new Set<TruckStatus>();
+
+    for (let i = 0; i < N; i++) {
+      const status: TruckStatus = service['pickRandom'](possibleStatuses);
+      selectedStatuses.add(status);
+
+      if (selectedStatuses.size === possibleStatuses.length) {
+        break;
+      }
+    }
+    expect(selectedStatuses.size).toBe(possibleStatuses.length);
+  });
 });

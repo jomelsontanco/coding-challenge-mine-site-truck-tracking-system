@@ -3,6 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map-component';
 import { MOCK_MAP } from '../../mock-data/mock-map-definition';
 import { By } from '@angular/platform-browser';
+import { MapService } from '../../services/map-service';
+
+const mockMapService = {
+  getMap: () => MOCK_MAP,
+};
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -14,6 +19,7 @@ describe('MapComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MapComponent],
+      providers: [{ provide: MapService, useValue: mockMapService }],
     }).compileComponents();
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
@@ -57,7 +63,7 @@ describe('MapComponent', () => {
 
   it('should draw the loading zone with correct coordinates', () => {
     const margin = component.CLIPPING_MARGIN;
-    const zone = MOCK_MAP.loadingZone;
+    const zone = component.mapData.loadingZone;
     const expectedX = zone.minX + margin;
     const expectedY = zone.minY + margin;
     const expectedWidth = zone.maxX - zone.minX;
@@ -80,7 +86,7 @@ describe('MapComponent', () => {
 
   it('should draw the dumping zone with correct coordinates', () => {
     const margin = component.CLIPPING_MARGIN;
-    const zone = MOCK_MAP.dumpingZone;
+    const zone = component.mapData.dumpingZone;
     const expectedX = zone.minX + margin;
     const expectedY = zone.minY + margin;
     const expectedWidth = zone.maxX - zone.minX;
@@ -107,5 +113,20 @@ describe('MapComponent', () => {
 
     const truckText = fixture.debugElement.query(By.css('text'));
     expect(truckText).toBeTruthy();
+  });
+
+  it('should calculated a shifted dimension more than base dimension', () => {
+    expect(component.SHIFTED_WIDTH).toBeGreaterThan(component.mapData.width);
+    expect(component.SHIFTED_HEIGHT).toBeGreaterThan(component.mapData.height);
+
+    const container = fixture.debugElement.query(By.css('.container'));
+    const styleWidth = container.styles['width'];
+    const styleHeight = container.styles['height'];
+    const containerWidth = parseInt(styleWidth ?? '', 10);
+    const containerHeight = parseInt(styleHeight ?? '', 10);
+    expect(containerWidth).not.toBeNaN();
+    expect(containerHeight).not.toBeNaN();
+    expect(containerWidth).toBeGreaterThan(component.mapData.width);
+    expect(containerHeight).toBeGreaterThan(component.mapData.height);
   });
 });
