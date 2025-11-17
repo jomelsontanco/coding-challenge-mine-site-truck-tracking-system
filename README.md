@@ -18,11 +18,27 @@ It follows three guiding patterns:
 
 ## Structure
 
-The project is structured according to three categories, each following a distinct responsibility:
+### Architecture
+
+The project is structured according to three concerns, each following a distinct responsibility:
 
 1. Map Definition (map-definition, map-service, mock-map-definition) - responsible for defining the contents of the map ("what to render").
-2. Map View (map-component) - responsible for how the map is rendered ("how to render").
-3. Truck Simulator (truck-simulator-service) - responsible for pushing real-time updates to the map ("when and what to render").
+
+2. Map View (map-component) - responsible for how the map is rendered ("what the map looks like").
+
+3. Truck Simulator (truck-simulator-service) - responsible for pushing real-time updates to the map ("when to render").
+
+### Project Structure
+
+This Angular application is divided into four folders:
+
+1. services - contains the programs that need their state to be shared across the application.
+
+2. component - contains the map renderer.
+
+3. mock-data - contains the sample map file used for the application and unit testing.
+
+4. models - contains the interfaces that serve as a common contract for the services and the components to communicate.
 
 ## Technical Solutioning
 
@@ -36,4 +52,8 @@ The clipping margin expands the original dimensions of the map to allow the clip
 
 ## Unit Testing Scenarios and Results
 
-![Karma unit testing results](./public/unit_testing.png)
+Unit testing covers all critical scenarios in the technical requirements documents.
+
+It also includes checking if the clipping margin is calculated properly.
+
+![Karma unit testing results](./markdown/unit_testing.png)
