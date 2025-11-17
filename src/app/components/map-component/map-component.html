@@ -1,36 +1,46 @@
-<h1>Mine Site Truck Tracking System ({{ mapData.width }}x{{ mapData.height }})</h1>
-<div class="container" [style.width.px]="SHIFTED_WIDTH" [style.height.px]="SHIFTED_HEIGHT">
-  <canvas
-    #canvasRef
-    class="visualization-layer"
-    [attr.width]="SHIFTED_WIDTH"
-    [attr.height]="SHIFTED_HEIGHT"
-  ></canvas>
-
-  <svg class="visualization-layer svg-layer" [attr.viewBox]="SHIFTED_VIEW_BOX">
-    <svg:rect
-      [attr.width]="mapData.width"
-      [attr.height]="mapData.height"
-      fill="none"
-      stroke="#000000"
-      stroke-width="2"
-      stroke-dasharray="4 4"
-    />
-    @let truck=truck$ | async; @if (truck) {
-    <svg:circle
-      [attr.cx]="truck.position.x"
-      [attr.cy]="truck.position.y"
-      [attr.r]="mapData.truckCircleRadius"
-      [attr.fill]="mapData.truckStatusColors[truck.status]"
-    ></svg:circle>
-    <svg:text
-      [attr.x]="truck.position.x"
-      [attr.y]="truck.position.y - mapData.truckCircleRadius - 8"
-      text-anchor="middle"
-      [attr.font-size]="mapData.textFontSize"
+<figure>
+  <figcaption>
+    <h1>Mine Site Truck Tracking System</h1>
+  </figcaption>
+  <div class="container" [style.width.px]="SHIFTED_WIDTH" [style.height.px]="SHIFTED_HEIGHT">
+    <canvas
+      #canvasRef
+      class="visualization-layer"
+      [attr.width]="SHIFTED_WIDTH"
+      [attr.height]="SHIFTED_HEIGHT"
+    ></canvas>
+    <svg
+      class="visualization-layer svg-layer"
+      [attr.viewBox]="SHIFTED_VIEW_BOX"
+      role="group"
+      aria-label="Real-time visualization of truck locations on a map with dimensions {{
+        mapData.width
+      }} by {{ mapData.height }}."
     >
-      {{ truck.id }} ({{ truck.speed }} km/h)
-    </svg:text>
-    }
-  </svg>
-</div>
+      <svg:rect
+        [attr.width]="mapData.width"
+        [attr.height]="mapData.height"
+        fill="none"
+        stroke="#000000"
+        stroke-width="2"
+        stroke-dasharray="4 4"
+      />
+      @let truck=truck$ | async; @if (truck) {
+      <svg:circle
+        [attr.cx]="truck.position.x"
+        [attr.cy]="truck.position.y"
+        [attr.r]="mapData.truckCircleRadius"
+        [attr.fill]="mapData.truckStatusColors[truck.status]"
+      />
+      <svg:text
+        [attr.x]="truck.position.x"
+        [attr.y]="truck.position.y - mapData.truckCircleRadius - 8"
+        text-anchor="middle"
+        [attr.font-size]="mapData.textFontSize"
+      >
+        {{ truck.id }} ({{ truck.speed }} km/h)
+      </svg:text>
+      }
+    </svg>
+  </div>
+</figure>
