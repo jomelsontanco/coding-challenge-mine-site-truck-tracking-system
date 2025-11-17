@@ -111,8 +111,15 @@ export class TruckSimulatorService implements OnDestroy {
     const newPositionY =
       currentPosition.y + this.randomPixelMovement(this.Y_MIN_JUMP, this.Y_MAX_JUMP);
     return {
-      x: newPositionX > this._map.width ? this._map.width : newPositionX,
-      y: newPositionY > this._map.height ? this._map.height : newPositionY,
+      x:
+        newPositionX > this._map.width
+          ? this.randomPixelMovement(this._map.dumpingZone.minX, this._map.dumpingZone.maxX)
+          : newPositionX,
+      y:
+        newPositionY >
+        this.randomPixelMovement(this._map.dumpingZone.minY, this._map.dumpingZone.maxY)
+          ? this._map.height
+          : newPositionY,
     };
   }
 
@@ -122,8 +129,11 @@ export class TruckSimulatorService implements OnDestroy {
     const newPositionY =
       currentPosition.y - this.randomPixelMovement(this.Y_MIN_JUMP, this.Y_MAX_JUMP);
     return {
-      x: newPositionX < 0 ? 0 : newPositionX,
-      y: newPositionY < 0 ? 0 : newPositionY,
+      x:
+        newPositionX < 0
+          ? this.randomPixelMovement(this._map.loadingZone.minX, this._map.loadingZone.maxX)
+          : newPositionX,
+      y: newPositionY < 0 ? (this._map.loadingZone.minY, this._map.loadingZone.maxY) : newPositionY,
     };
   }
 
