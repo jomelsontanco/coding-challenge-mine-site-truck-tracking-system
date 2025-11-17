@@ -52,8 +52,12 @@ The clipping margin expands the original dimensions of the map to allow the clip
 
 ## Unit Testing Scenarios and Results
 
-Unit testing covers all critical scenarios in the technical requirements documents.
+Unit testing covers 17 scenarios.
 
-It also includes checking if the clipping margin is calculated properly.
+13 of which are critical scenarios in the technical requirements document.
+
+Clipping margin is included as it is considered critical to user experience.
+
+The remaining 4 scenarios are basic tests for creation.
 
 ![Karma unit testing results](./markdown/unit_testing.png)
