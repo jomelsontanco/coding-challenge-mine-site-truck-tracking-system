@@ -12,8 +12,8 @@ This project was constructed with unit testing covering all critical requirement
 
 It follows three guiding patterns:
 
-1. Minimal CSS
-2. Smart and Dumb Component Angular Architecture
+1. Semantic HTML
+2. Smart and dumb component architecture
 3. Separation of concerns
 
 ## Structure
@@ -33,3 +33,7 @@ The clipping margin is a technical solution to the clipping problem.
 The clipping problem happens when objects are not rendered fully ("clipped") when positioned at the edges of the map.
 
 The clipping margin expands the original dimensions of the map to allow the clipped objects to render fully.
+
+## Unit Testing Scenarios and Results
+
+![Karma unit testing results](./public/unit_testing.png)
