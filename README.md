@@ -22,7 +22,7 @@ It follows three guiding patterns:
 
 ### Architecture
 
-The project is structured according to four concerns, each following a distinct responsibility:
+The project is architected according to three concerns, each following a distinct responsibility:
 
 1. Map Definition (map-definition, map-service, mock-map-definition) - responsible for defining the contents of the map ("what to render").
 
